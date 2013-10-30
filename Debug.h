@@ -11,7 +11,7 @@ class Debug
         virtual ~Debug();
         void dint(int);
         void dstring(std::string);
-        int test2 = 1;
+        int decounter = 0;
 
 
     protected:

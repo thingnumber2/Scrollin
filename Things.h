@@ -9,7 +9,8 @@ class Things
         Things();
         virtual ~Things();
         std::vector <Character> charvector;
-        void addchar (int,int,int,int,bool);
+        void addchar (int,int,int,int,int,int,bool);
+        void addchardef (int,int, bool);
 
     protected:
     private:

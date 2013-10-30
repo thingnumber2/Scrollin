@@ -12,6 +12,12 @@ struct coord //Just stores coordinates. Right on.
     int Y;
 };
 
+enum SuccFail
+{
+    Fail = 0,
+    Success = 1,
+    MAXSuccFail
+};
 
 
 

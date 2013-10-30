@@ -1,4 +1,5 @@
 #include "TheVideo.h"
+extern Debug DB;
 
 TheVideo::TheVideo()
 {
@@ -63,7 +64,7 @@ void TheVideo::Startup()
             defaultsprite.setTexture(deftext); //set the sprite's texture to our loaded texture
 
 
-        ///Draw tiles (testing)
+        ///Draw passable/impassable/hitbox (testing)
 // TODO (Dan#1#): Move the character, draw the character, make character collisions. Make other characters.
 //Character size needs to be a thing, their hitbox, etc.
             //loop through the map array looking for impassable tiles and draw them
@@ -71,20 +72,22 @@ void TheVideo::Startup()
             {
                 for (int b = 0;b<200;b++)
                 {
-                    if (AllMap.maparray[a][b] == 1)
+                    if (AllMap.maparray[a][b] == -1)
                       {
                             defaultsprite.setColor(sf::Color::Blue);
                             defaultsprite.setPosition(a*10,b*10); //set position converted into pixels
                             window.draw(defaultsprite);
 
                       }
-                      else if (AllMap.maparray[a][b] == 2)
+                    else if (AllMap.maparray[a][b] >= -1) //draw hitboxes
                       {
+
                             defaultsprite.setColor(sf::Color::Yellow);
                             defaultsprite.setPosition(a*10,b*10); //set position converted into pixels
                             window.draw(defaultsprite);
 
                       }
+
 
                 }
             };
