@@ -19,6 +19,14 @@ enum SuccFail
     MAXSuccFail
 };
 
+enum directions
+{
+    dup,
+    ddown,
+    dleft,
+    dright,
+    MaxDirections
+};
 
 
 

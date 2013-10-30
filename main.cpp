@@ -1,8 +1,8 @@
 #include <iostream>
 #include "TheVideo.h"
 // TODO (Dan#1#): Exceptions?!?
-TheMap AllMap;
-Things AllThings;
+TheMap AllMap; //Global map
+Things AllThings; //Global things thing
 Debug DB;
 
 
@@ -13,8 +13,8 @@ int main()
     {
         AllMap.testfill();
         TheVideo Drawing;
-        AllThings.addchardef(196,10,true);
-        DB.dint(AllMap.teleportchar(0,30,180));
+        AllThings.addchardef(30,180,true);
+        AllMap.teleportchar(0,30,190);
         Drawing.Startup();
 
 

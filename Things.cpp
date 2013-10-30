@@ -2,7 +2,7 @@
 
 Things::Things()
 {
-    //ctor
+    theplayer = 0; //defaults the player to 0
 }
 
 Things::~Things()
@@ -10,9 +10,9 @@ Things::~Things()
     //dtor
 }
 
-void Things::addchar(int X,int Y,int xbox,int ybox,int speed,int charnum,bool isplayer)
+void Things::addchar(int X,int Y,int xbox,int ybox,int speed,int jump,int charnum,bool isplayer)
 {
-    Character newcharacter(X,Y,xbox,ybox,speed,charnum,charvector.size(),isplayer);
+    Character newcharacter(X,Y,xbox,ybox,speed,jump,charnum,charvector.size(),isplayer);
     charvector.push_back(newcharacter);
 
 

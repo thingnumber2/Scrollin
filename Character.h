@@ -9,7 +9,7 @@
 class Character
 {
     public:
-        Character(int,int,int,int,int,int,int,bool); //kind of a weird character thing, might not be permanent
+        Character(int,int,int,int,int,int,int,int,bool); //kind of a weird character thing, might not be permanent
         Character(int,int,bool,int); //Just for making a basic default character
         virtual ~Character();
         int Getcharposx() {return charpos.X;}
@@ -28,8 +28,8 @@ class Character
         {charhbox.X = -1;
          charhbox.Y = -1;}
 
-         bool GetPlayer() {return Player;}
-         void SetPlayer(int val) {Player = val;}
+         bool GetisPlayer() {return isPlayer;}
+         void SetisPlayer(int val){isPlayer = val;}
 
          int Getcharspeed(){return charspeed;}
          void Setcharspeed(int val) {charspeed = val;}
@@ -48,7 +48,9 @@ class Character
         coord charpos; //The character's position on the map, this is the top left corner of the character
         coord charhbox; //The character's hit box
         int charspeed; //How fast this character moves
-        bool Player; //Is this the player or not
+        int charjump; //momentum added when you jump
+        int charmoment; //actual momentum
+        bool isPlayer; //Is this the player or not
         int charnum; //The character's assigned number (later may match the vector position)
         int vecpos; //The character's vector position
 };

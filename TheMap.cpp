@@ -2,7 +2,7 @@
 
 TheMap::TheMap()
 {
-   Gravity = 10; //default Gravity setting
+   Gravity = 5; //default Gravity setting
 }
 
 TheMap::~TheMap()
@@ -31,8 +31,88 @@ void TheMap::testfill() //just fills this thing while I'm testing
                 }
             };
 }
-// TODO (Dan#1#): Move and teleport characters onto the map. Hitboxes should all contain the character vectorposition?
-//When moving, need to have some sort of collision detection/resolution
+
+void TheMap::Gravitycheck()
+{
+    // TODO (Dan#1#): Do this thing here
+}
+
+// TODO (Dan#2#): Gravity thoughts: ...
+//Gravity "movechar"s you down always, at a rate of Gravity minus Momentum. When you jump, your character gains upward momentum, and you will lose it to gravity each second.  If you hit an obstacle above you , you will also be reduced to 0 momentum.
+
+
+// TODO (Dan#1#): Character movement, and then, gravity, which should just be an extension of movement.
+///Movement amount should always be 1, speed should be something else. If it's more than 1 we can pass through other things without a check.
+bool TheMap::movechar(int vecpos,int direction) //removes character info from old location and adds them to new location based on their speed of movement
+{
+        int newX = AllThings.charvector[vecpos].Getcharposx(); //sets defaults for X and Y, to be changed below
+        int newY = AllThings.charvector[vecpos].Getcharposy();
+        switch (direction) //Sets each of these based the direction moved.
+        {
+            case dup:
+            newY = newY - 1;
+            break;
+            case ddown:
+            newY = newY + 1;
+            break;
+            case dleft:
+            newX = newX - 1;
+            break;
+            case dright:
+            newX = newX + 1;
+            break;
+
+        }
+
+
+     //Checks if there's anything already in that space (other than empty space and the existing character) and fails if so.
+    for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
+    {
+        for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
+        {
+            if (maparray[newX + A][newY + B] != vecpos && maparray[newX + A][newY + B] != -2)
+                return Fail;
+
+        }
+
+
+    }
+    //Remove's character's hitbox based on character position and hitbox size. Hitbox is composed of the character's vector position
+    for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
+    {
+        for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
+        {
+            maparray[AllThings.charvector[vecpos].Getcharposx() + A][AllThings.charvector[vecpos].Getcharposy() + B] = -2;
+        }
+
+
+    }
+
+    //Draws character's hitbox based on character position and hitbox size. Hitbox is composed of the character's vector position
+    for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
+    {
+        for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
+        {
+            maparray[newX + A][newY + B] = vecpos;
+        }
+
+
+    }
+
+        //set new location for this character, yay
+        AllThings.charvector[vecpos].Setcharposx(newX);
+        AllThings.charvector[vecpos].Setcharposy(newY);
+        return Success;
+
+
+
+}
+
+
+
+
+
+
 bool TheMap::teleportchar(int vecpos,int newX,int newY) //removes character info from old location and adds them to new location
 {
 
@@ -73,7 +153,6 @@ bool TheMap::teleportchar(int vecpos,int newX,int newY) //removes character info
         AllThings.charvector[vecpos].Setcharposx(newX);
         AllThings.charvector[vecpos].Setcharposy(newY);
         return Success;
-    // TODO (Dan#2#): Add a collision checker, this may need to be a seperate function
 
 
 

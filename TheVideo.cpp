@@ -26,13 +26,26 @@ void TheVideo::Startup()
         ///Events here
 
         sf::Event event; //event loop
-        while (window.pollEvent(event))
+        while (window.pollEvent(event)) // TODO (Dan#2#): Need to work on a way to change the speed of movement based on the character's speed. May have to limit or increase the number of moves in each timeframe.
         {
         switch (event.type)
             {
                 // window closed
                 case sf::Event::Closed:
                     window.close();
+                    break;
+
+                case sf::Event::KeyPressed:
+
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                    {
+                        AllMap.movechar(AllThings.Gettheplayer(),dleft); //sort of a placeholder thing right now for testing
+                    }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+                    {
+                        AllMap.movechar(AllThings.Gettheplayer(),dright);
+                    }
+
                     break;
 
 
