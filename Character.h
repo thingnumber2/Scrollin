@@ -31,6 +31,9 @@ class Character
          bool GetisPlayer() {return isPlayer;}
          void SetisPlayer(int val){isPlayer = val;}
 
+         bool Getintheair() {return intheair;}
+         void Setintheair(int val){intheair = val;}
+
          int Getcharspeed(){return charspeed;}
          void Setcharspeed(int val) {charspeed = val;}
 
@@ -39,6 +42,28 @@ class Character
 
          int Getvecpos(){return vecpos;}
          void Setvecpos(int val) {vecpos = val;}
+
+         int Getcharmoment(){return charmoment;}
+         void Setcharmoment(int val) {charmoment = val;}
+         void jumpjump ()
+         {
+             if (intheair == false) //so long as the character isn't already jumping, jump
+             {
+                 charmoment = charjump;
+             }
+
+         }//make the character jump?
+         void Reducemoment(int val) //reduces momentum without going below 0
+             {
+                 if (charmoment - val <= 0)
+                 {
+                     charmoment = 0;
+                 }
+                 else
+                 {
+                     charmoment = charmoment - val;
+                 }
+             }
 
 
 
@@ -50,6 +75,7 @@ class Character
         int charspeed; //How fast this character moves
         int charjump; //momentum added when you jump
         int charmoment; //actual momentum
+        bool intheair; //is this character in the air?
         bool isPlayer; //Is this the player or not
         int charnum; //The character's assigned number (later may match the vector position)
         int vecpos; //The character's vector position

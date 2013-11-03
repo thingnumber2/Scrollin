@@ -27,7 +27,7 @@ Character::Character(int X, int Y, bool isplayer,int vectorpos)
     vecpos = vectorpos;
     SetisPlayer(isplayer);
     charspeed = 2;
-    charjump  = 10;
+    charjump  = 20;
     charmoment = 0;
 }
 

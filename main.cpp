@@ -14,7 +14,7 @@ int main()
         AllMap.testfill();
         TheVideo Drawing;
         AllThings.addchardef(30,180,true);
-        AllMap.teleportchar(0,30,190);
+        AllMap.teleportchar(0,30,150);
         Drawing.Startup();
 
 

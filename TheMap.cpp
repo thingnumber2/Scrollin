@@ -1,8 +1,10 @@
 #include "TheMap.h"
+extern Things AllThings;
+extern Debug DB;
 
 TheMap::TheMap()
 {
-   Gravity = 5; //default Gravity setting
+   Gravity = 1; //default Gravity setting
 }
 
 TheMap::~TheMap()
@@ -16,7 +18,11 @@ void TheMap::testfill() //just fills this thing while I'm testing
             {
                 for (int b = 0;b<200;b++)
                 {
-                    if (b == 199||b == 198||b==0||b==1)
+                    if (b== 185 && a == 40||b== 185 && a == 41||b== 185 && a == 42||b== 185 && a == 43||b== 185 && a == 44||b== 185 && a == 45||b== 185 && a == 46||b== 185 && a == 47)
+                    {
+                        maparray[a][b] = -1;
+                    }
+                    else if (b == 199||b == 198||b==0||b==1)
                     {
                         maparray[a][b] = -1;
                     }
@@ -32,10 +38,7 @@ void TheMap::testfill() //just fills this thing while I'm testing
             };
 }
 
-void TheMap::Gravitycheck()
-{
-    // TODO (Dan#1#): Do this thing here
-}
+
 
 // TODO (Dan#2#): Gravity thoughts: ...
 //Gravity "movechar"s you down always, at a rate of Gravity minus Momentum. When you jump, your character gains upward momentum, and you will lose it to gravity each second.  If you hit an obstacle above you , you will also be reduced to 0 momentum.
@@ -88,7 +91,7 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
 
     }
 
-    //Draws character's hitbox based on character position and hitbox size. Hitbox is composed of the character's vector position
+    //Adds character's hitbox based on character position and hitbox size. Hitbox is composed of the character's vector position
     for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
     {
         for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
@@ -156,4 +159,24 @@ bool TheMap::teleportchar(int vecpos,int newX,int newY) //removes character info
 
 
 
+}
+
+void TheMap::Gravitycheck() //does gravity related things
+{
+    for (int A = 0;A < AllThings.charvector.size();A++) //iterates through all characters
+    {
+        if (AllThings.charvector[A].Getcharmoment() == 0) //checks each character to see their current momentum, and if it is equal to 0, gravity affects them, if not, it is reduced by the gravity amount and they move upward
+        {
+          AllThings.charvector[A].Setintheair(movechar(A,ddown)); //if movechar fails a "down" move, this will cause "in the air" to be "false" . If move char is successful, this character is still in the air.
+        }
+        else
+        {
+            AllThings.charvector[A].Reducemoment(Gravity);
+            AllThings.charvector[A].Setintheair(movechar(A,dup)); //ditto
+        }
+
+
+    }
+
+    // TODO (Dan#1#): Make this smooth somehow, add momentum
 }

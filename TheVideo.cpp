@@ -1,6 +1,6 @@
 #include "TheVideo.h"
 extern Debug DB;
-
+extern Things AllThings;
 TheVideo::TheVideo()
 {
     //ctor
@@ -19,11 +19,31 @@ void TheVideo::Startup()
      sf::View Camera1; //this is the camera view
      Camera1.setSize(sf::Vector2f(800, 500)); //setting it's  size
      window.setView(Camera1);
+     sf::Clock clock1; //The clock!
 
    while (window.isOpen())
     {
         window.clear(sf::Color::Black);
         ///Events here
+
+        sf::Time elapsedtime = clock1.getElapsedTime();
+                if (elapsedtime.asMilliseconds() > 10)
+                {
+                    AllMap.Gravitycheck(); ///gravity yo
+                    ///movement keypress events
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))// left key is pressed: move our character
+                    {
+                         AllMap.movechar(AllThings.Gettheplayer(),dleft);
+                    }
+
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))// right key is pressed: move our character
+                    {
+                         AllMap.movechar(AllThings.Gettheplayer(),dright);
+                    }
+
+
+                    clock1.restart();
+                }
 
         sf::Event event; //event loop
         while (window.pollEvent(event)) // TODO (Dan#2#): Need to work on a way to change the speed of movement based on the character's speed. May have to limit or increase the number of moves in each timeframe.
@@ -37,15 +57,10 @@ void TheVideo::Startup()
 
                 case sf::Event::KeyPressed:
 
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //press up to jump
                     {
-                        AllMap.movechar(AllThings.Gettheplayer(),dleft); //sort of a placeholder thing right now for testing
+                       AllThings.charvector[AllThings.Gettheplayer()].jumpjump();
                     }
-                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                    {
-                        AllMap.movechar(AllThings.Gettheplayer(),dright);
-                    }
-
                     break;
 
 

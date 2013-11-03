@@ -2,8 +2,7 @@
 #define THEMAP_H
 #include <vector>
 #include "Things.h"
-
-extern Things AllThings;
+#include "stuff.h"
 
 
 
