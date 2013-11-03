@@ -76,7 +76,7 @@ void TheVideo::Startup()
 
         ///Draw Here
 
-            Camera1.setCenter(sf::Vector2f(400, 1750));
+            Camera1.setCenter(sf::Vector2f(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx() * 10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy() * 10));
             window.setView(Camera1);
 
             sf::Font gisha;
@@ -96,15 +96,26 @@ void TheVideo::Startup()
 // TODO (Dan#1#): Move the character, draw the character, make character collisions. Make other characters.
 //Character size needs to be a thing, their hitbox, etc.
             //loop through the map array looking for impassable tiles and draw them
+            bool flip; //just to flip the colors
             for (int a = 0;a<1000;a++)
             {
+                flip = !flip;
                 for (int b = 0;b<200;b++)
                 {
                     if (AllMap.maparray[a][b] == -1)
                       {
-                            defaultsprite.setColor(sf::Color::Blue);
+                            if (flip)
+                            {
+                                defaultsprite.setColor(sf::Color::Blue);
+                            }
+                            else
+                            {
+                                defaultsprite.setColor(sf::Color::Cyan);
+                            }
+
                             defaultsprite.setPosition(a*10,b*10); //set position converted into pixels
                             window.draw(defaultsprite);
+
 
                       }
                     else if (AllMap.maparray[a][b] >= -1) //draw hitboxes
