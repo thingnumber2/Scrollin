@@ -172,7 +172,15 @@ void TheMap::Gravitycheck() //does gravity related things
         else
         {
             AllThings.charvector[A].Reducemoment(Gravity);
-            AllThings.charvector[A].Setintheair(movechar(A,dup)); //ditto
+            if (AllThings.charvector[A].Getcharmoment() != 0) //an attempt to make the character move a little bit through the air before starting to drop
+            {
+                if (movechar(A,dup)) //if the jump isn't interfered with, set state as "in the air"
+                {
+                    AllThings.charvector[A].Setintheair(true);
+                }
+
+            }
+
         }
 
 
