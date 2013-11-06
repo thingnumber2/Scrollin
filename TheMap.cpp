@@ -11,6 +11,7 @@ TheMap::~TheMap()
 {
     //dtor
 }
+// TODO (Dan#1#): Make a better map maker
 
 void TheMap::testfill() //just fills this thing while I'm testing
 {
@@ -40,11 +41,7 @@ void TheMap::testfill() //just fills this thing while I'm testing
 
 
 
-// TODO (Dan#2#): Gravity thoughts: ...
-//Gravity "movechar"s you down always, at a rate of Gravity minus Momentum. When you jump, your character gains upward momentum, and you will lose it to gravity each second.  If you hit an obstacle above you , you will also be reduced to 0 momentum.
 
-
-// TODO (Dan#1#): Character movement, and then, gravity, which should just be an extension of movement.
 ///Movement amount should always be 1, speed should be something else. If it's more than 1 we can pass through other things without a check.
 bool TheMap::movechar(int vecpos,int direction) //removes character info from old location and adds them to new location based on their speed of movement
 {
@@ -178,6 +175,11 @@ void TheMap::Gravitycheck() //does gravity related things
                 {
                     AllThings.charvector[A].Setintheair(true);
                 }
+                else
+                {
+                    AllThings.charvector[A].Setcharmoment(0);
+                }
+
 
             }
 
@@ -186,5 +188,4 @@ void TheMap::Gravitycheck() //does gravity related things
 
     }
 
-    // TODO (Dan#1#): Make this smooth somehow, add momentum
 }

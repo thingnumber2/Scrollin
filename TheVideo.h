@@ -13,6 +13,7 @@ class TheVideo
         TheVideo();
         virtual ~TheVideo();
         void Startup ();
+        int MainMenu();
     protected:
     private:
 };
