@@ -13,34 +13,6 @@ TheMap::~TheMap()
 }
 // TODO (Dan#1#): Make a better map maker
 
-void TheMap::testfill() //just fills this thing while I'm testing
-{
-     for (int a = 0;a<1000;a++) //fill the array with some basic stuff
-            {
-                for (int b = 0;b<200;b++)
-                {
-                    if (b== 185 && a == 40||b== 185 && a == 41||b== 185 && a == 42||b== 185 && a == 43||b== 185 && a == 44||b== 185 && a == 45||b== 185 && a == 46||b== 185 && a == 47)
-                    {
-                        maparray[a][b] = -1;
-                    }
-                    else if (b == 199||b == 198||b==0||b==1)
-                    {
-                        maparray[a][b] = -1;
-                    }
-
-                    else if (a == 0||a == 999||a==1||a==998)
-                    {
-                        maparray[a][b] = -1;
-                    }
-                    else
-                    maparray[a][b] = -2;
-
-                }
-            };
-}
-
-
-
 
 ///Movement amount should always be 1, speed should be something else. If it's more than 1 we can pass through other things without a check.
 bool TheMap::movechar(int vecpos,int direction) //removes character info from old location and adds them to new location based on their speed of movement

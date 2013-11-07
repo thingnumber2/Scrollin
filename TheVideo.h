@@ -14,6 +14,7 @@ class TheVideo
         virtual ~TheVideo();
         void Startup ();
         int MainMenu();
+        void Mapmake();
     protected:
     private:
 };
