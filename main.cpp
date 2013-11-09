@@ -1,6 +1,5 @@
 #include <iostream>
 #include "TheVideo.h"
-// TODO (Dan#3#): Exceptions?!?
 TheMap AllMap; //Global map
 Things AllThings; //Global things thing
 Debug DB; //debug class, neato.
@@ -32,6 +31,7 @@ int main()
         }
         */
         Drawing.Startup();
+        //Drawing.Mapmake();
 
 
 

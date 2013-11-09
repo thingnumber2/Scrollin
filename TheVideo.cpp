@@ -3,7 +3,7 @@ extern Debug DB;
 extern Things AllThings;
 TheVideo::TheVideo()
 {
-    //ctor
+
 }
 
 TheVideo::~TheVideo()
@@ -26,6 +26,7 @@ void TheVideo::Startup()
         window.clear(sf::Color::Black);
         ///Events here
 
+// TODO (Dan#1#): get movement speed sorted out
         sf::Time elapsedtime = clock1.getElapsedTime();
                 if (elapsedtime.asMilliseconds() > 10)
                 {
@@ -35,11 +36,14 @@ void TheVideo::Startup()
                     {
                          AllMap.movechar(AllThings.Gettheplayer(),dleft);
                     }
-
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))// right key is pressed: move our character
                     {
                          AllMap.movechar(AllThings.Gettheplayer(),dright);
                     }
+
+
+
+
 
 
                     clock1.restart();
@@ -57,10 +61,27 @@ void TheVideo::Startup()
 
                 case sf::Event::KeyPressed:
 
-                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //press up to jump
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //press up to jump
                     {
                        AllThings.charvector[AllThings.Gettheplayer()].jumpjump();
                     }
+                    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //press down to crouch
+                    {
+                       AllThings.charvector[AllThings.Gettheplayer()].crouchcrouch(); //crouch man!
+                       AllMap.movechar(AllThings.Gettheplayer(),MaxDirections);
+                    }
+
+                    break;
+
+
+                case sf::Event::KeyReleased:
+                    if (event.key.code == sf::Keyboard::Down)
+                    {
+                        AllThings.charvector[AllThings.Gettheplayer()].standstand(); //stands back up
+                        AllMap.movechar(AllThings.Gettheplayer(),MaxDirections); //did a quick movement call to refresh the character's position.
+                    }
+
+
                     break;
 
 
@@ -75,6 +96,7 @@ void TheVideo::Startup()
 
 
         ///Draw Here
+// TODO (Dan#2#): Get sprite drawing sorted out
 
             Camera1.setCenter(sf::Vector2f(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx() * 10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy() * 10));
             window.setView(Camera1);
@@ -281,9 +303,10 @@ int TheVideo::MainMenu()
     }
 
 
-void TheVideo::Mapmake()
+// TODO (Dan#3#): This is a giant pain, but finish it at some point. Make the camera moveable and be able to add stuff onto the map
+void TheVideo::Mapmake()///THIS IS NOT THE MAIN STARTUP WINDOW IT'S THE MAPMAKER DON'T MAKE EDITS HERE THAT YOU MEAN TO PUT ELSEWHERE
 {
-     sf::RenderWindow window(sf::VideoMode(800, 500), "awwwww dang"); //This is drawing the window
+     sf::RenderWindow window(sf::VideoMode(800, 500), "Mapmaker"); //This is drawing the window
 
 
      sf::View Camera1; //this is the camera view
@@ -301,19 +324,14 @@ void TheVideo::Mapmake()
                 {
                     AllMap.Gravitycheck(); ///gravity yo
                     ///movement keypress events
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))// left key is pressed: move our character
-                    {
-                         AllMap.movechar(AllThings.Gettheplayer(),dleft);
-                    }
-
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))// right key is pressed: move our character
-                    {
-                         AllMap.movechar(AllThings.Gettheplayer(),dright);
-                    }
-
-
                     clock1.restart();
                 }
+
+        sf::Vector2i LP = sf::Mouse::getPosition(window); //grabs position and puts it in a vector named LP
+        int XPOS = LP.x - (LP.x % 10); //x and y position , rounded DOWN to the nearest 20 (because the tiles are in increments of 20)
+        int YPOS = LP.y - (LP.y % 10);
+
+
 
         sf::Event event; //event loop
         while (window.pollEvent(event))
@@ -325,19 +343,19 @@ void TheVideo::Mapmake()
                     window.close();
                     break;
 
-                case sf::Event::KeyPressed:
+                case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
 
-                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //press up to jump
-                    {
-                       AllThings.charvector[AllThings.Gettheplayer()].jumpjump();
-                    }
-                    break;
+                }
+                else if (event.mouseButton.button == sf::Mouse::Right)
+                {
+                    //At some point make this move the map around
 
+                }
 
-                // we don't process other types of events
                 default:
-                    break;
-            }
+                break;
 
 
         }
@@ -345,8 +363,9 @@ void TheVideo::Mapmake()
 
 
         ///Draw Here
+// TODO (Dan#5#): Right click to move the screen or whatever
 
-            Camera1.setCenter(sf::Vector2f(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx() * 10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy() * 10));
+            Camera1.setCenter(sf::Vector2f(Getscreenx(),Getscreeny()));
             window.setView(Camera1);
 
             sf::Font gisha;
@@ -409,3 +428,6 @@ void TheVideo::Mapmake()
 }
 
 }
+}
+
+

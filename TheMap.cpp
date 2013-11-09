@@ -11,7 +11,7 @@ TheMap::~TheMap()
 {
     //dtor
 }
-// TODO (Dan#1#): Make a better map maker
+
 
 
 ///Movement amount should always be 1, speed should be something else. If it's more than 1 we can pass through other things without a check.
@@ -33,6 +33,8 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
             case dright:
             newX = newX + 1;
             break;
+            default:
+            break;
 
         }
 
@@ -46,7 +48,6 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
                 return Fail;
 
         }
-
 
     }
     //Remove's character's hitbox based on character position and hitbox size. Hitbox is composed of the character's vector position

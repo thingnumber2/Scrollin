@@ -14,6 +14,7 @@ Character::Character(int X,int Y,int xbox,int ybox, int speed,int jump,int charn
     SetisPlayer(isplayer);
     charspeed = speed;
     charjump = jump;
+    iscrouched = false;
     charmoment = 0;
 }
 
@@ -28,6 +29,7 @@ Character::Character(int X, int Y, bool isplayer,int vectorpos)
     SetisPlayer(isplayer);
     charspeed = 2;
     charjump  = 20;
+    iscrouched = false;
     charmoment = 0;
 }
 

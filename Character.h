@@ -5,7 +5,7 @@
 
 
 
-// TODO (Dan#2#): Crouching
+// TODO (Dan#3#): Crouching is mostly done, but you need to make the speed slower when you're crouched.
 
 class Character
 {
@@ -54,6 +54,35 @@ class Character
              }
 
          }//make the character jump?
+
+// FIXME (Dan#1#): There's a bug here that when you're running you leave behind little hitbox poops when trying to crouch and I can't figure out why.
+         void crouchcrouch ()
+         {
+             if (iscrouched == false) //so long as the character isn't already crouched, crouch
+             {
+                 charhbox.Y = charhbox.Y-3; //make the character's hitbox smaller for the crouch
+
+             }
+
+             iscrouched = true;
+
+         }
+         void standstand ()
+         {
+             if (iscrouched == true) //so long as the character isn't already crouched, crouch
+             {
+                 charhbox.Y = charhbox.Y+3; //make the character's hitbox smaller for the crouch
+                 charpos.Y = charpos.Y-3; //moves the character's position up 3 to match up with the size change. Yes it's negative, that's cuz Y gets smaller the higher it gets.
+
+
+             }
+
+             iscrouched = false;
+
+         }
+
+
+
          void Reducemoment(int val) //reduces momentum without going below 0
              {
                  if (charmoment - val <= 0)
@@ -77,6 +106,8 @@ class Character
         int charjump; //momentum added when you jump
         int charmoment; //actual momentum
         bool intheair; //is this character in the air?
+// TODO (Dan#1#): Also , controllers? That's an easy one
+        bool iscrouched;
         bool isPlayer; //Is this the player or not
         int charnum; //The character's assigned number (later may match the vector position)
         int vecpos; //The character's vector position
