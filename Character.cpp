@@ -13,9 +13,11 @@ Character::Character(int X,int Y,int xbox,int ybox, int speed,int jump,int charn
     vecpos = vectorpos;
     SetisPlayer(isplayer);
     charspeed = speed;
+    currentspeed = 0;
     charjump = jump;
     iscrouched = false;
     charmoment = 0;
+    SetMovetick(0);
 }
 
 Character::Character(int X, int Y, bool isplayer,int vectorpos)
@@ -28,9 +30,11 @@ Character::Character(int X, int Y, bool isplayer,int vectorpos)
     vecpos = vectorpos;
     SetisPlayer(isplayer);
     charspeed = 2;
-    charjump  = 20;
+    currentspeed = 0;
+    charjump  = 40;
     iscrouched = false;
     charmoment = 0;
+    SetMovetick(0);
 }
 
 Character::~Character()

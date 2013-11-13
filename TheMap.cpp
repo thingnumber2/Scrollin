@@ -5,6 +5,7 @@ extern Debug DB;
 TheMap::TheMap()
 {
    Gravity = 1; //default Gravity setting
+   Gravtick = 0;
 }
 
 TheMap::~TheMap()
@@ -131,8 +132,23 @@ bool TheMap::teleportchar(int vecpos,int newX,int newY) //removes character info
 
 }
 
+void TheMap::Movecheck(int vecpos, int movedir) //check if it's okay to move the character based on established speed
+{
+    if (AllThings.charvector[vecpos].GetMovetick() >= AllThings.charvector[vecpos].Getcharspeed())
+    {
+        movechar(vecpos,movedir);
+        AllThings.charvector[vecpos].ResetMovetick();
+    }
+    else
+    {
+        AllThings.charvector[vecpos].AddMovetick();
+    }
+}
+
 void TheMap::Gravitycheck() //does gravity related things
 {
+    if (Gravtick >= Gravity) //if enough ticks have passed to meet or exceeed gravity, do gravity
+    {
     for (int A = 0;A < AllThings.charvector.size();A++) //iterates through all characters
     {
         if (AllThings.charvector[A].Getcharmoment() == 0) //checks each character to see their current momentum, and if it is equal to 0, gravity affects them, if not, it is reduced by the gravity amount and they move upward
@@ -159,6 +175,12 @@ void TheMap::Gravitycheck() //does gravity related things
         }
 
 
+    }
+    ResetGravtick(); //Reset ticks back to 0
+    }
+    else //If ticks are below 10, add 1 more.
+    {
+        AddGravtick();
     }
 
 }

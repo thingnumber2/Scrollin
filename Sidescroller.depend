@@ -376,16 +376,16 @@
 1383074600 source:c:\users\dan\projects\sidescroller\things.cpp
 	"Things.h"
 
-1383867360 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
+1384275299 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
 	"Character.h"
 
-1383954084 c:\users\dan\projects\sidescroller\scrollin\character.h
+1384302603 c:\users\dan\projects\sidescroller\scrollin\character.h
 	"stuff.h"
 	"Debug.h"
 
 1383170018 c:\users\dan\projects\sidescroller\scrollin\stuff.h
 
-1383856997 c:\users\dan\projects\sidescroller\scrollin\themap.h
+1384302525 c:\users\dan\projects\sidescroller\scrollin\themap.h
 	<vector>
 	"Things.h"
 	"stuff.h"
@@ -748,12 +748,16 @@
 1383173505 c:\users\dan\projects\sidescroller\scrollin\things.h
 	"Character.h"
 
-1383952087 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
+1384302537 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
 	"TheMap.h"
 
-1383953065 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
+1384302525 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
 	"TheVideo.h"
 
 1383173491 source:c:\users\dan\projects\sidescroller\scrollin\things.cpp
 	"Things.h"
+
+1384213437 c:\users\dan\projects\sidescroller\scrollin\gravity.h
+	"Things.h"
+	"TheMap.h"
 

@@ -26,19 +26,20 @@ void TheVideo::Startup()
         window.clear(sf::Color::Black);
         ///Events here
 
-// TODO (Dan#1#): get movement speed sorted out
+// TODO (Dan#1#): get movement speed sorted out. GRAVITY USES THE MOVE FUNCTION SO IT'S DOUBLING UP AGGGGG. There has to be a better way.
         sf::Time elapsedtime = clock1.getElapsedTime();
-                if (elapsedtime.asMilliseconds() > 10)
+                if (elapsedtime.asMilliseconds() > 1)
                 {
                     AllMap.Gravitycheck(); ///gravity yo
                     ///movement keypress events
+
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))// left key is pressed: move our character
                     {
-                         AllMap.movechar(AllThings.Gettheplayer(),dleft);
+                         AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))// right key is pressed: move our character
                     {
-                         AllMap.movechar(AllThings.Gettheplayer(),dright);
+                         AllMap.Movecheck(AllThings.Gettheplayer(),dright);
                     }
 
 

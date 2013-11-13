@@ -17,10 +17,18 @@ class TheMap
         int maparray [1000][200]; //this is the map array. It assumes tiles as 10/10 pixels. -2 is passable, anything -1 or greater is impassable, 2 is hitbox? Translation to pixelsis 2000 pixels tall, 10,000 long.
         bool teleportchar(int,int,int);
         bool movechar(int,int);
-        void Gravitycheck();
+        void Movecheck(int,int);
 
+
+        void Gravitycheck();
         int GetGravity(){return Gravity;}
         void SetGravity(int val) {Gravity = val;}
+        int GetGravtick(){return Gravtick;}
+        void SetGravtick(int val) {Gravtick = val;}
+        void AddGravtick() {Gravtick = Gravtick + 1;}
+        void ResetGravtick () {Gravtick = 0;}
+
+
 
         void SaveMap(std::string mapsavename) //saves just the map,not the characters. Can make it do that though, if we need to.
         {
@@ -68,6 +76,8 @@ class TheMap
     protected:
     private:
         int Gravity; //How fast things drop eh?
+        int Gravtick; //A tick for Gravity, to balance movement for everybody.
+        int Movetick; //ditto for movement
 };
 
 #endif // THEMAP_H

@@ -38,6 +38,9 @@ class Character
          int Getcharspeed(){return charspeed;}
          void Setcharspeed(int val) {charspeed = val;}
 
+         int Getcurrentspeed(){return currentspeed;}
+         void Setcurrentspeed(int val) {currentspeed = val;}
+
          int Getcharnum(){return charnum;}
          void Setcharnum(int val) {charnum = val;}
 
@@ -96,13 +99,19 @@ class Character
              }
 
 
+        int GetMovetick(){return Movetick;}
+        void SetMovetick(int val) {Movetick = val;}
+        void AddMovetick() {Movetick = Movetick + 1;}
+        void ResetMovetick () {Movetick = 0;}
+
+
 
 
     protected:
     private:
         coord charpos; //The character's position on the map, this is the top left corner of the character
         coord charhbox; //The character's hit box
-        int charspeed; //How fast this character moves
+        int charspeed; //How fast this character moves. It's basically how many "ticks" have to pass before it moves, so the LOWER the faster.
         int charjump; //momentum added when you jump
         int charmoment; //actual momentum
         bool intheair; //is this character in the air?
@@ -111,6 +120,8 @@ class Character
         bool isPlayer; //Is this the player or not
         int charnum; //The character's assigned number (later may match the vector position)
         int vecpos; //The character's vector position
+        int currentspeed; //is this used?
+        int Movetick; //how many ticks have passed since this character tried to move last.
 };
 
 #endif // CHARACTER_H
