@@ -25,13 +25,14 @@ void TheVideo::Startup()
     {
         window.clear(sf::Color::Black);
         ///Events here
-
-// TODO (Dan#1#): get movement speed sorted out. GRAVITY USES THE MOVE FUNCTION SO IT'S DOUBLING UP AGGGGG. There has to be a better way.
+// TODO (Dan#6#): Add controller support
         sf::Time elapsedtime = clock1.getElapsedTime();
                 if (elapsedtime.asMilliseconds() > 1)
                 {
                     AllMap.Gravitycheck(); ///gravity yo
                     ///movement keypress events
+
+// TODO (Dan#5#): Need to research how most games handle both buttons pressed at the same time.
 
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))// left key is pressed: move our character
                     {
@@ -97,7 +98,7 @@ void TheVideo::Startup()
 
 
         ///Draw Here
-// TODO (Dan#2#): Get sprite drawing sorted out
+// TODO (Dan#3#): Get sprite drawing sorted out
 
             Camera1.setCenter(sf::Vector2f(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx() * 10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy() * 10));
             window.setView(Camera1);

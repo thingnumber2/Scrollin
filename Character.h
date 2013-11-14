@@ -5,19 +5,19 @@
 
 
 
-// TODO (Dan#3#): Crouching is mostly done, but you need to make the speed slower when you're crouched.
+/** Class for generating all characters in the game*/
 
 class Character
 {
     public:
-        Character(int,int,int,int,int,int,int,int,bool); //kind of a weird character thing, might not be permanent
-        Character(int,int,bool,int); //Just for making a basic default character
+        Character(int,int,int,int,int,int,int,int,bool); /**< Custom character constructor */
+        Character(int,int,bool,int); /**< Default character constructor*/
         virtual ~Character();
         int Getcharposx() {return charpos.X;}
         int Getcharposy() {return charpos.Y;}
         void Setcharposx(int val) {charpos.X = val;}
         void Setcharposy(int val) {charpos.Y = val;}
-        void Resetcharpos() //this may or may not even work, what is more than 1 character does this? Ewwww
+        void Resetcharpos() /**< Resets the character's position to -99 for x and y. Don't use? */
         {charpos.X = -99;
          charpos.Y = -99;}
 
@@ -25,7 +25,7 @@ class Character
         int Getcharhboxy() {return charhbox.Y;}
         void Setcharhboxx(int val) {charhbox.X = val;}
         void Setcharhboxy(int val) {charhbox.Y = val;}
-        void Resetcharhbox() //should never need to use this?
+        void Resetcharhbox()  /**< Resets the character's box size to -1. Don't use this either */
         {charhbox.X = -1;
          charhbox.Y = -1;}
 
@@ -35,11 +35,11 @@ class Character
          bool Getintheair() {return intheair;}
          void Setintheair(int val){intheair = val;}
 
+         bool Getiscrouched() {return iscrouched;}
+         void Setiscrouched(int val){iscrouched = val;}
+
          int Getcharspeed(){return charspeed;}
          void Setcharspeed(int val) {charspeed = val;}
-
-         int Getcurrentspeed(){return currentspeed;}
-         void Setcurrentspeed(int val) {currentspeed = val;}
 
          int Getcharnum(){return charnum;}
          void Setcharnum(int val) {charnum = val;}
@@ -49,18 +49,23 @@ class Character
 
          int Getcharmoment(){return charmoment;}
          void Setcharmoment(int val) {charmoment = val;}
+         /**< Checks if the character is already in the air, and if not, jumps! */
          void jumpjump ()
          {
-             if (intheair == false) //so long as the character isn't already jumping, jump
+             if (intheair == false)
              {
                  charmoment = charjump;
              }
 
-         }//make the character jump?
+         }
 
-// FIXME (Dan#1#): There's a bug here that when you're running you leave behind little hitbox poops when trying to crouch and I can't figure out why.
-         void crouchcrouch ()
+         void crouchcrouch ()  /**< Checks if the character is in the air or already crouched, and if not, crouches. */
          {
+             if (intheair == true) //can't crouch in the air
+             {
+                 return;
+             }
+
              if (iscrouched == false) //so long as the character isn't already crouched, crouch
              {
                  charhbox.Y = charhbox.Y-3; //make the character's hitbox smaller for the crouch
@@ -70,9 +75,9 @@ class Character
              iscrouched = true;
 
          }
-         void standstand ()
+         void standstand ()  /**< If the character is crouched, uncrouch em  */
          {
-             if (iscrouched == true) //so long as the character isn't already crouched, crouch
+             if (iscrouched == true) //so long as the character is crouching, stand
              {
                  charhbox.Y = charhbox.Y+3; //make the character's hitbox smaller for the crouch
                  charpos.Y = charpos.Y-3; //moves the character's position up 3 to match up with the size change. Yes it's negative, that's cuz Y gets smaller the higher it gets.
@@ -86,7 +91,7 @@ class Character
 
 
 
-         void Reducemoment(int val) //reduces momentum without going below 0
+         void Reducemoment(int val)  /**< Reduces character momemtum down to 0 */
              {
                  if (charmoment - val <= 0)
                  {
@@ -102,26 +107,24 @@ class Character
         int GetMovetick(){return Movetick;}
         void SetMovetick(int val) {Movetick = val;}
         void AddMovetick() {Movetick = Movetick + 1;}
-        void ResetMovetick () {Movetick = 0;}
+        void ResetMovetick () {Movetick = 0;}  /**< Resets Movetick to 0! */
 
 
 
 
     protected:
     private:
-        coord charpos; //The character's position on the map, this is the top left corner of the character
-        coord charhbox; //The character's hit box
-        int charspeed; //How fast this character moves. It's basically how many "ticks" have to pass before it moves, so the LOWER the faster.
-        int charjump; //momentum added when you jump
-        int charmoment; //actual momentum
-        bool intheair; //is this character in the air?
-// TODO (Dan#1#): Also , controllers? That's an easy one
-        bool iscrouched;
-        bool isPlayer; //Is this the player or not
-        int charnum; //The character's assigned number (later may match the vector position)
-        int vecpos; //The character's vector position
-        int currentspeed; //is this used?
-        int Movetick; //how many ticks have passed since this character tried to move last.
+        coord charpos; /**< The character's position on the map, this is the top left corner of the character*/
+        coord charhbox; /**< The character's hit box*/
+        int charspeed; /**< How fast this character moves CURRENTLY. This is affected by crouching and stuff*/
+        int charjump; /**< momentum added when you jump*/
+        int charmoment; /**< actual momentum*/
+        bool intheair; /**< is this character in the air*/
+        bool iscrouched; /**< is this character crouched */
+        bool isPlayer; /**< Is this the player or not*/
+        int charnum; /**< The character's assigned number (later may match the vector position)*/
+        int vecpos; /**< The character's vector position*/
+        int Movetick; /**< how many ticks have passed since this character tried to move last.*/
 };
 
 #endif // CHARACTER_H

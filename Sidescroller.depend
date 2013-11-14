@@ -376,10 +376,10 @@
 1383074600 source:c:\users\dan\projects\sidescroller\things.cpp
 	"Things.h"
 
-1384275299 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
+1384384695 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
 	"Character.h"
 
-1384302603 c:\users\dan\projects\sidescroller\scrollin\character.h
+1384388487 c:\users\dan\projects\sidescroller\scrollin\character.h
 	"stuff.h"
 	"Debug.h"
 
@@ -735,7 +735,7 @@
 1383163423 source:c:\users\dan\projects\sidescroller\scrollin\debug.cpp
 	"Debug.h"
 
-1383862520 source:c:\users\dan\projects\sidescroller\scrollin\main.cpp
+1384388487 source:c:\users\dan\projects\sidescroller\scrollin\main.cpp
 	<iostream>
 	"TheVideo.h"
 	<cassert>
@@ -748,10 +748,10 @@
 1383173505 c:\users\dan\projects\sidescroller\scrollin\things.h
 	"Character.h"
 
-1384302537 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
+1384386545 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
 	"TheMap.h"
 
-1384302525 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
+1384388574 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
 	"TheVideo.h"
 
 1383173491 source:c:\users\dan\projects\sidescroller\scrollin\things.cpp

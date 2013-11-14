@@ -41,6 +41,8 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
 
 
      //Checks if there's anything already in that space (other than empty space and the existing character) and fails if so.
+// TODO (Dan#3#): Make this it's own function so that you can have things check other things
+
     for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
     {
         for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
@@ -134,7 +136,13 @@ bool TheMap::teleportchar(int vecpos,int newX,int newY) //removes character info
 
 void TheMap::Movecheck(int vecpos, int movedir) //check if it's okay to move the character based on established speed
 {
-    if (AllThings.charvector[vecpos].GetMovetick() >= AllThings.charvector[vecpos].Getcharspeed())
+    int movespeed = AllThings.charvector[vecpos].Getcharspeed(); //set the character's move speed
+    if (AllThings.charvector[vecpos].Getiscrouched()) //can't move while crouched, like mario, but we could change it or whatever
+    {
+        return;
+    }
+
+    if (AllThings.charvector[vecpos].GetMovetick() >= movespeed)
     {
         movechar(vecpos,movedir);
         AllThings.charvector[vecpos].ResetMovetick();
