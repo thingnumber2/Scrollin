@@ -3,7 +3,7 @@
 extern Debug DB;
 
 // TODO (Dan#6#): At some point you need to make it so that when the character generates he's put on the map instead of having to be teleported or moved first. Maybe this should be in the map class instead though, and just call this character class.
-Character::Character(int X,int Y,int xbox,int ybox, int speed,int jump,int charnumber,int vectorpos,bool isplayer)
+Character::Character(int X,int Y,int xbox,int ybox, int speed,int jump,int charnumber,int vectorpos,bool isplayer,int whatsheet)
 {
     charpos.X = X;
     charpos.Y = Y;
@@ -17,6 +17,9 @@ Character::Character(int X,int Y,int xbox,int ybox, int speed,int jump,int charn
     iscrouched = false;
     charmoment = 0;
     SetMovetick(0);
+    charsheet = whatsheet;
+    Setcharfacing(1);
+    Setismoving(0);
 }
 
 Character::Character(int X, int Y, bool isplayer,int vectorpos)
@@ -33,6 +36,9 @@ Character::Character(int X, int Y, bool isplayer,int vectorpos)
     iscrouched = false;
     charmoment = 0;
     SetMovetick(0);
+    charsheet = CSdef;
+    Setcharfacing(1);
+    Setismoving(0);
 }
 
 Character::~Character()

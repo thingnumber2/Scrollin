@@ -6,6 +6,7 @@ TheVideo::TheVideo()
 
 }
 
+
 TheVideo::~TheVideo()
 {
     //dtor
@@ -14,18 +15,38 @@ TheVideo::~TheVideo()
 void TheVideo::Startup()
 {
      sf::RenderWindow window(sf::VideoMode(800, 500), "awwwww dang"); //This is drawing the window
-
+     Charanimate Animatechar; //class for animating the characters
 
      sf::View Camera1; //this is the camera view
      Camera1.setSize(sf::Vector2f(800, 500)); //setting it's  size
      window.setView(Camera1);
      sf::Clock clock1; //The clock!
 
+///Make sure to load all this stuff OUTSIDE the loop man.
+    sf::Texture deftext; //create new texture
+    if (!deftext.loadFromFile("images/default.png")) //define the texture as our png in "images"
+    {window.clear(sf::Color::Red);} //junky error message
+    sf::Sprite defaultsprite; //create new sprite
+    defaultsprite.setTexture(deftext); //set the sprite's texture to our loaded texture
+
+    sf::Texture testtext; //testing texture
+    if (!testtext.loadFromFile("images/megatest.png")) //define the texture as our png in "images"
+    {exit(1);} //junky error message
+    sf::Sprite testsprite; //player character's sprite
+    testsprite.setTexture(testtext); //set the sprite's texture to our loaded texture
+
+    sf::Texture ssheettest; //Sprite sheet test
+    ssheettest.setSmooth(true);
+    if (!ssheettest.loadFromFile("images/mm.gif"))
+    {exit(1);} //junky error message
+    sf::Sprite ssheet;
+    ssheet.setTexture(ssheettest);
+
    while (window.isOpen())
     {
         window.clear(sf::Color::Black);
         ///Events here
-// TODO (Dan#6#): Add controller support
+// TODO (Dan#7#): Add controller support
         sf::Time elapsedtime = clock1.getElapsedTime();
                 if (elapsedtime.asMilliseconds() > 1)
                 {
@@ -82,8 +103,14 @@ void TheVideo::Startup()
                         AllThings.charvector[AllThings.Gettheplayer()].standstand(); //stands back up
                         AllMap.movechar(AllThings.Gettheplayer(),MaxDirections); //did a quick movement call to refresh the character's position.
                     }
-
-
+                    else if (event.key.code == sf::Keyboard::Left)
+                    {
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(false); //character is no longer moving
+                    }
+                    else if (event.key.code == sf::Keyboard::Right)
+                    {
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(false); //character is no longer moving
+                    }
                     break;
 
 
@@ -109,11 +136,7 @@ void TheVideo::Startup()
 
 
 
-            sf::Texture deftext; //create new texture
-            if (!deftext.loadFromFile("images/default.png")) //define the texture as our png in "images"
-            {window.clear(sf::Color::Red);} //junky error message
-            sf::Sprite defaultsprite; //create new sprite
-            defaultsprite.setTexture(deftext); //set the sprite's texture to our loaded texture
+
 
 
         ///Draw passable/impassable/hitbox (testing)
@@ -140,18 +163,43 @@ void TheVideo::Startup()
 
 
                       }
-                    else if (AllMap.maparray[a][b] >= -1) //draw hitboxes
+/*
+                   else if (AllMap.maparray[a][b] >= -1) // TODO (Dan#4#): bring this back later as an optional view option
+
                       {
+
+
 
                             defaultsprite.setColor(sf::Color::Yellow);
                             defaultsprite.setPosition(a*10,b*10); //set position converted into pixels
                             window.draw(defaultsprite);
 
-                      }
+
+
+                      }*/
+
 
 
                 }
             };
+
+            ///Draw all characters (testing)
+            for (int A=0;A < AllThings.charvector.size();A++) //iterate through the character vector
+            {
+                fcoord therect;
+                switch (AllThings.charvector[A].Getcharsheet()) //check which character sheet we're looking at
+                {
+                    case CSdef:
+                    therect = Animatechar.animate(A); //run animation function, and set the coordinates to the return value
+                    ssheet.setTextureRect(sf::IntRect(therect.locX, therect.locY, therect.sizeX, therect.sizeY)); //sets where to find this character on the loaded sheet
+                    ssheet.setPosition(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx()*10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy()*10);
+                    window.draw(ssheet);
+                    break;
+
+                    default:
+                    break;
+                }
+            }
 
 
 

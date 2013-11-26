@@ -4,7 +4,7 @@ TheMap AllMap; //Global map
 Things AllThings; //Global things thing
 Debug DB; //debug class, neato.
 #include <cassert>
-// TODO (Dan#2#): Document the code. Not sure what I'm doing wrong on this but it's not quite working.
+// TODO (Dan#4#): Document the code. Not sure what I'm doing wrong on this but it's not quite working.
 
 using namespace std;
 

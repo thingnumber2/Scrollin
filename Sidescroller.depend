@@ -376,14 +376,15 @@
 1383074600 source:c:\users\dan\projects\sidescroller\things.cpp
 	"Things.h"
 
-1384384695 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
+1385432547 source:c:\users\dan\projects\sidescroller\scrollin\character.cpp
 	"Character.h"
 
-1384388487 c:\users\dan\projects\sidescroller\scrollin\character.h
+1385431115 c:\users\dan\projects\sidescroller\scrollin\character.h
 	"stuff.h"
 	"Debug.h"
+	<string>
 
-1383170018 c:\users\dan\projects\sidescroller\scrollin\stuff.h
+1385432745 c:\users\dan\projects\sidescroller\scrollin\stuff.h
 
 1384302525 c:\users\dan\projects\sidescroller\scrollin\themap.h
 	<vector>
@@ -735,29 +736,37 @@
 1383163423 source:c:\users\dan\projects\sidescroller\scrollin\debug.cpp
 	"Debug.h"
 
-1384388487 source:c:\users\dan\projects\sidescroller\scrollin\main.cpp
+1384472097 source:c:\users\dan\projects\sidescroller\scrollin\main.cpp
 	<iostream>
 	"TheVideo.h"
 	<cassert>
 
-1383860991 c:\users\dan\projects\sidescroller\scrollin\thevideo.h
+1385430924 c:\users\dan\projects\sidescroller\scrollin\thevideo.h
 	<SFML/Graphics.hpp>
 	"TheMap.h"
 	"Things.h"
+	"Charanimate.h"
 
 1383173505 c:\users\dan\projects\sidescroller\scrollin\things.h
 	"Character.h"
 
-1384386545 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
+1385433058 source:c:\users\dan\projects\sidescroller\scrollin\themap.cpp
 	"TheMap.h"
 
-1384388574 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
+1385434309 source:c:\users\dan\projects\sidescroller\scrollin\thevideo.cpp
 	"TheVideo.h"
 
-1383173491 source:c:\users\dan\projects\sidescroller\scrollin\things.cpp
+1385424723 source:c:\users\dan\projects\sidescroller\scrollin\things.cpp
 	"Things.h"
 
 1384213437 c:\users\dan\projects\sidescroller\scrollin\gravity.h
 	"Things.h"
 	"TheMap.h"
+
+1385436476 source:c:\users\dan\projects\sidescroller\scrollin\charanimate.cpp
+	"Charanimate.h"
+
+1385435805 c:\users\dan\projects\sidescroller\scrollin\charanimate.h
+	"stuff.h"
+	"Things.h"
 

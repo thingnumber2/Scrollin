@@ -12,7 +12,7 @@ Things::~Things()
 
 void Things::addchar(int X,int Y,int xbox,int ybox,int speed,int jump,int charnum,bool isplayer)
 {
-    Character newcharacter(X,Y,xbox,ybox,speed,jump,charnum,charvector.size(),isplayer);
+    Character newcharacter(X,Y,xbox,ybox,speed,jump,charnum,charvector.size(),isplayer,CSdef);
     charvector.push_back(newcharacter);
 
 

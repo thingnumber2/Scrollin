@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "TheMap.h"
 #include "Things.h"
+#include "Charanimate.h"
 
 extern TheMap AllMap;
 
@@ -40,6 +41,8 @@ class TheVideo
 
                     }
             }
+
+
 
     protected:
     private:

@@ -12,6 +12,14 @@ struct coord //Just stores coordinates. Right on.
     int Y;
 };
 
+struct fcoord //stores frame coordinates in a sprite sheet
+{
+    int locX; //location of the frame on the sprite sheet (top left corner of it I think?)
+    int locY;
+    int sizeX; //size of the frame on the sprite sheet
+    int sizeY;
+};
+
 enum SuccFail
 {
     Fail = 0,
@@ -27,6 +35,25 @@ enum directions
     dright,
     MaxDirections
 };
+
+enum animstates //AHH I don't know
+{
+    running,
+    crouching,
+    jumping,
+    standing,
+    MAXanimstates
+
+
+};
+
+enum charsheets
+{
+    CSdef,
+    MAXCS
+};
+
+
 
 
 

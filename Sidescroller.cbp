@@ -52,6 +52,8 @@
 		</Linker>
 		<Unit filename="Character.cpp" />
 		<Unit filename="Character.h" />
+		<Unit filename="Charanimate.cpp" />
+		<Unit filename="Charanimate.h" />
 		<Unit filename="Debug.cpp" />
 		<Unit filename="Debug.h" />
 		<Unit filename="TheMap.cpp" />

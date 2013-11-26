@@ -41,14 +41,18 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
 
 
      //Checks if there's anything already in that space (other than empty space and the existing character) and fails if so.
-// TODO (Dan#3#): Make this it's own function so that you can have things check other things
+// TODO (Dan#5#): Make this it's own function so that you can have things check other things
 
     for (int A = 0; A < AllThings.charvector[vecpos].Getcharhboxx();A++)
     {
         for (int B = 0; B < AllThings.charvector[vecpos].Getcharhboxy();B++)
         {
             if (maparray[newX + A][newY + B] != vecpos && maparray[newX + A][newY + B] != -2)
+            {
+                //AllThings.charvector[vecpos].Setismoving(false); //character is no longer moving I don't think I need this here
                 return Fail;
+            }
+
 
         }
 
@@ -78,6 +82,7 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
         //set new location for this character, yay
         AllThings.charvector[vecpos].Setcharposx(newX);
         AllThings.charvector[vecpos].Setcharposy(newY);
+        AllThings.charvector[vecpos].Setismoving(true); //set character as moving
         return Success;
 
 
@@ -146,6 +151,14 @@ void TheMap::Movecheck(int vecpos, int movedir) //check if it's okay to move the
     {
         movechar(vecpos,movedir);
         AllThings.charvector[vecpos].ResetMovetick();
+        if (movedir == dleft)
+        {
+            AllThings.charvector[vecpos].Setcharfacing(0);
+        }
+        else if (movedir == dright)
+        {
+            AllThings.charvector[vecpos].Setcharfacing(1);
+        }
     }
     else
     {

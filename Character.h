@@ -2,6 +2,7 @@
 #define CHARACTER_H
 #include "stuff.h"
 #include "Debug.h"
+#include <string>
 
 
 
@@ -10,7 +11,7 @@
 class Character
 {
     public:
-        Character(int,int,int,int,int,int,int,int,bool); /**< Custom character constructor */
+        Character(int,int,int,int,int,int,int,int,bool,int); /**< Custom character constructor */
         Character(int,int,bool,int); /**< Default character constructor*/
         virtual ~Character();
         int Getcharposx() {return charpos.X;}
@@ -38,6 +39,12 @@ class Character
          bool Getiscrouched() {return iscrouched;}
          void Setiscrouched(int val){iscrouched = val;}
 
+         bool Getismoving() {return ismoving;}
+         void Setismoving(int val){ismoving = val;}
+
+         bool Getcharfacing() {return charfacing;}
+         void Setcharfacing(int val){charfacing = val;}
+
          int Getcharspeed(){return charspeed;}
          void Setcharspeed(int val) {charspeed = val;}
 
@@ -46,6 +53,15 @@ class Character
 
          int Getvecpos(){return vecpos;}
          void Setvecpos(int val) {vecpos = val;}
+
+         int Getcharsheet(){return charsheet;}
+         void Setcharsheet(int val) {charsheet = val;}
+
+         int Getlaststate(){return laststate;}
+         void Setlaststate(int val) {laststate = val;}
+
+         int Getlastframe(){return lastframe;}
+         void Setlastframe(int val) {lastframe = val;}
 
          int Getcharmoment(){return charmoment;}
          void Setcharmoment(int val) {charmoment = val;}
@@ -116,15 +132,20 @@ class Character
     private:
         coord charpos; /**< The character's position on the map, this is the top left corner of the character*/
         coord charhbox; /**< The character's hit box*/
+        bool charfacing; //direction the character is facing, 0 is left, 1 is right.
         int charspeed; /**< How fast this character moves CURRENTLY. This is affected by crouching and stuff*/
         int charjump; /**< momentum added when you jump*/
         int charmoment; /**< actual momentum*/
         bool intheair; /**< is this character in the air*/
         bool iscrouched; /**< is this character crouched */
+        bool ismoving; /**< is this character walking or running? */
         bool isPlayer; /**< Is this the player or not*/
         int charnum; /**< The character's assigned number (later may match the vector position)*/
         int vecpos; /**< The character's vector position*/
         int Movetick; /**< how many ticks have passed since this character tried to move last.*/
+        int charsheet; //what sheet is this character using?
+        int laststate; //the animation state this character was in the last time we checked.
+        int lastframe; //the last frame we did for this character in the state we're in.
 };
 
 #endif // CHARACTER_H
