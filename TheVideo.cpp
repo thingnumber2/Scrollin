@@ -21,6 +21,8 @@ void TheVideo::Startup()
      Camera1.setSize(sf::Vector2f(800, 500)); //setting it's  size
      window.setView(Camera1);
      sf::Clock clock1; //The clock!
+     sf::Clock animateclock; //animation clock
+     fcoord therect; //animation rectangle coordinates.
 
 ///Make sure to load all this stuff OUTSIDE the loop man.
     sf::Texture deftext; //create new texture
@@ -44,10 +46,9 @@ void TheVideo::Startup()
 
    while (window.isOpen())
     {
-        window.clear(sf::Color::Black);
+                window.clear(sf::Color::Black);
         ///Events here
-// TODO (Dan#7#): Add controller support
-        sf::Time elapsedtime = clock1.getElapsedTime();
+                sf::Time elapsedtime = clock1.getElapsedTime();
                 if (elapsedtime.asMilliseconds() > 1)
                 {
                     AllMap.Gravitycheck(); ///gravity yo
@@ -58,10 +59,31 @@ void TheVideo::Startup()
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))// left key is pressed: move our character
                     {
                          AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
+                         AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
+
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))// right key is pressed: move our character
                     {
                          AllMap.Movecheck(AllThings.Gettheplayer(),dright);
+                         AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
+                    }
+
+                    //Just fiddling around with the Xbox controller controls
+                    if (sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) == 100)
+                    {
+                        AllMap.Movecheck(AllThings.Gettheplayer(),dright);
+                    }
+                    if (sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) == -100)
+                    {
+                        AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
+                    }
+                    if (sf::Joystick::getAxisPosition(0,sf::Joystick::X) == 100)
+                    {
+                        AllMap.Movecheck(AllThings.Gettheplayer(),dright);
+                    }
+                    if (sf::Joystick::getAxisPosition(0,sf::Joystick::X) == -100)
+                    {
+                        AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
                     }
 
 
@@ -96,6 +118,15 @@ void TheVideo::Startup()
 
                     break;
 
+                case sf::Event::JoystickButtonPressed:
+                    if (sf::Joystick::isButtonPressed(0,0))
+                    {
+                        AllThings.charvector[AllThings.Gettheplayer()].jumpjump();
+                    }
+
+                    break;
+
+
 
                 case sf::Event::KeyReleased:
                     if (event.key.code == sf::Keyboard::Down)
@@ -124,8 +155,8 @@ void TheVideo::Startup()
 
 
 
+
         ///Draw Here
-// TODO (Dan#3#): Get sprite drawing sorted out
 
             Camera1.setCenter(sf::Vector2f(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx() * 10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy() * 10));
             window.setView(Camera1);
@@ -186,11 +217,16 @@ void TheVideo::Startup()
             ///Draw all characters (testing)
             for (int A=0;A < AllThings.charvector.size();A++) //iterate through the character vector
             {
-                fcoord therect;
+                sf::Time timelapsed = animateclock.getElapsedTime();
+                if (timelapsed.asMilliseconds() > 100) //time between changing frames
+                {
+                    therect = Animatechar.animate(A); //run animation function, and set the coordinates to the return value
+                    animateclock.restart();
+                }
+
                 switch (AllThings.charvector[A].Getcharsheet()) //check which character sheet we're looking at
                 {
                     case CSdef:
-                    therect = Animatechar.animate(A); //run animation function, and set the coordinates to the return value
                     ssheet.setTextureRect(sf::IntRect(therect.locX, therect.locY, therect.sizeX, therect.sizeY)); //sets where to find this character on the loaded sheet
                     ssheet.setPosition(AllThings.charvector[AllThings.Gettheplayer()].Getcharposx()*10,AllThings.charvector[AllThings.Gettheplayer()].Getcharposy()*10);
                     window.draw(ssheet);

@@ -8,20 +8,21 @@ class Charanimate
     public:
         Charanimate();
         virtual ~Charanimate();
-        fcoord animate(int);
+        fcoord animate(int); //return the frame coordinates for this guy
+        int framecheck(int,int,int,int); //check which frame this character should be on
     protected:
     private:
         int spritesheet; //which sprite sheet is being used
         int laststate; //what was the last state that was animated
         int currentframe; //what is the current animation frame
-        fcoord runframeL[5]; //store frame locations on the sprite sheet. This really has to be redone.
-        fcoord runframeR[5];
-        fcoord crouframeL[1];
-        fcoord crouframeR[1];
-        fcoord jumpframeL[1];
-        fcoord jumpframeR[1];
-        fcoord standframeL[1];
-        fcoord standframeR[1];
+        fcoord runframeL[6]; //store frame locations on the sprite sheet.
+        fcoord runframeR[6];
+        fcoord crouframeL[2];
+        fcoord crouframeR[2];
+        fcoord jumpframeL[2];
+        fcoord jumpframeR[2];
+        fcoord standframeL[2];
+        fcoord standframeR[2];
 
 };
 

@@ -49,7 +49,6 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
         {
             if (maparray[newX + A][newY + B] != vecpos && maparray[newX + A][newY + B] != -2)
             {
-                //AllThings.charvector[vecpos].Setismoving(false); //character is no longer moving I don't think I need this here
                 return Fail;
             }
 
@@ -82,7 +81,7 @@ bool TheMap::movechar(int vecpos,int direction) //removes character info from ol
         //set new location for this character, yay
         AllThings.charvector[vecpos].Setcharposx(newX);
         AllThings.charvector[vecpos].Setcharposy(newY);
-        AllThings.charvector[vecpos].Setismoving(true); //set character as moving
+       // AllThings.charvector[vecpos].Setismoving(true); //set character as moving
         return Success;
 
 
@@ -174,7 +173,16 @@ void TheMap::Gravitycheck() //does gravity related things
     {
         if (AllThings.charvector[A].Getcharmoment() == 0) //checks each character to see their current momentum, and if it is equal to 0, gravity affects them, if not, it is reduced by the gravity amount and they move upward
         {
-          AllThings.charvector[A].Setintheair(movechar(A,ddown)); //if movechar fails a "down" move, this will cause "in the air" to be "false" . If move char is successful, this character is still in the air.
+            if (movechar(A,ddown))
+            {
+                AllThings.charvector[A].Setintheair(true);
+            }
+            else
+            {
+                AllThings.charvector[A].Setintheair(false);
+
+            }
+           //if movechar fails a "down" move, this will cause "in the air" to be "false" . If move char is successful, this character is still in the air.
         }
         else
         {
