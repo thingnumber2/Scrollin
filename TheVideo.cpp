@@ -68,22 +68,39 @@ void TheVideo::Startup()
                          AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
                     }
 
+// TODO (Dan#7#): Fix this so that the joystick doesn't make the keyboard controls wonky
+                    if (sf::Joystick::isConnected(0))
+                    {
+
                     //Just fiddling around with the Xbox controller controls
                     if (sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) == 100)
                     {
                         AllMap.Movecheck(AllThings.Gettheplayer(),dright);
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
+
                     }
                     if (sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) == -100)
                     {
                         AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
                     }
                     if (sf::Joystick::getAxisPosition(0,sf::Joystick::X) == 100)
                     {
                         AllMap.Movecheck(AllThings.Gettheplayer(),dright);
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
                     }
                     if (sf::Joystick::getAxisPosition(0,sf::Joystick::X) == -100)
                     {
                         AllMap.Movecheck(AllThings.Gettheplayer(),dleft);
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(true); //set character as moving
+                    }
+                    if (sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) < 100 && sf::Joystick::getAxisPosition(0,sf::Joystick::PovY) > -100 && sf::Joystick::getAxisPosition(0,sf::Joystick::PovX) < 100 && sf::Joystick::getAxisPosition(0,sf::Joystick::PovX) > -100 && sf::Joystick::getAxisPosition(0,sf::Joystick::Y) < 100 && sf::Joystick::getAxisPosition(0,sf::Joystick::Y) > -100 && sf::Joystick::getAxisPosition(0,sf::Joystick::X) < 100 && sf::Joystick::getAxisPosition(0,sf::Joystick::X) > -100)
+                    {
+                        AllThings.charvector[AllThings.Gettheplayer()].Setismoving(false); //set character as not moving
+
+                    }
+
+
                     }
 
 
